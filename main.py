@@ -2,7 +2,11 @@ from colorama import Cursor
 from flask import Flask
 from flask import render_template,request,redirect #solicitar la informacion
 from flaskext.mysql import MySQL
+from flask import send_from_directory # mostrar elementos en un directorio
+
 from datetime import datetime
+import os  # importar modulo de sistema operativo
+
 
 #from zmq import ContextOption
 # crear la aplicacion
@@ -15,6 +19,14 @@ app.config['MYSQL_DATABASE_PASSWORD']=''
 app.config['MYSQL_DATABASE_DB']='sistema'
 mysql.init_app(app)
 
+# Referencia con valor de carpeta
+Carpeta=os.path.join('uploads')
+app.config['Carpeta']=Carpeta   # crean referencia a una variable para guardar la ruta como un valor de carpeta
+
+#Solicitar url y mostrar imagenes
+@app.route('/uploads/<nombreFoto>')
+def uploads(nombreFoto):
+    return send_from_directory(app.config['Carpeta'],nombreFoto)
 
 
 #Insertar empleado
@@ -38,12 +50,16 @@ def destroy(id):
     pass
     conn= mysql.connect()
     cursor= conn.cursor()
-
+    
+    cursor.execute("SELECT foto FROM empleados WHERE id=%s", (id))
+    fila=cursor.fetchall()
+    os.remove(os.path.join(app.config['Carpeta'],fila[0][0]))
+    
     cursor.execute("DELETE FROM Empleados WHERE id=%s",(id)) # se asigna la instruccion SQL directa
     conn.commit()
     return redirect('/')
 
-# Editar empleados
+# Editar empleados para ser Actualizado
 @app.route('/edit/<int:id>')
 def edit(id):
 
@@ -69,7 +85,22 @@ def update():
 
     conn= mysql.connect()
     cursor= conn.cursor()
-    cursor.execute(sql,datos)
+
+    now= datetime.now()
+    tiempo=now.strftime("%Y%H%M%S")
+
+     #si el  campo no esta vacio concatenamos dato del  tiempo + nombre d ela fotografia y no sobreescribir a un foto anterior 
+    if _foto.filename!='':
+        nuevoNombreFoto=tiempo+_foto.filename
+        _foto.save("uploads/"+nuevoNombreFoto)
+        cursor.execute("SELECT foto FROM empleados WHERE id=%s", (id))
+        fila=cursor.fetchall()
+
+        os.remove(os.path.join(app.config['Carpeta'],fila[0][0]))
+        cursor.execute("UPDATE `empleados` SET `foto`=%s WHERE `id`=%s", (nuevoNombreFoto,id))
+        conn.commit()
+
+    cursor.execute(sql,datos)  # asignar nuevo nombre a la imagen
     conn.commit()
     return redirect('/')
     
@@ -106,7 +137,8 @@ def storage():
     cursor= conn.cursor()
     cursor.execute(sql,datos)
     conn.commit()
-    return render_template('empleados/create.html')
+    return redirect('/')
+    #return render_template('empleados/create.html')
 
     
 

@@ -1,14 +1,4 @@
-Sistema empleados
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>inicio</title>
-</head>
-<body>
-
+    {% include 'header.html' %}
     <table class="table table-light">
         <thead class="thead-light">
             <tr>
@@ -16,14 +6,19 @@ Sistema empleados
                 <th>Foto</th>
                 <th>Nombre</th>
                 <th>Correo</th>
-                <th>Acciones</th>
+                <th>Acciones</th>   
             </tr>
         </thead>
         <tbody>
             {% for empleado in empleados %}
             <tr>
                 <td>{{empleado[0] }}</td>
-                <td>{{empleado[3] }}</td>
+
+                <td>
+                    <img class="img-thumbnail" width="100" src="uploads/{{empleado[3] }}" alt="">
+                    
+                </td>
+
                 <td>{{empleado[1] }}</td>
                 <td>{{empleado[2] }}</td>
                 <td> <a href="/edit/{{empleado[0]}}">Editar</a>                   
@@ -36,5 +31,4 @@ Sistema empleados
         </tbody>
     </table>
 
-</body>
-</html>
+    {% include 'footer.html' %}    
