@@ -63,7 +63,7 @@ def update():
     _foto=request.files['txtfoto']
     id=request.form['txtID']
 
-    sql="UPDATE 'empleados' SET nombre=%s, correo=%s, id=%s ;"
+    sql="UPDATE `empleados` SET `nombre`=%s, `correo`=%s WHERE `id`=%s ;"
 
     datos=(_nombre,_correo,id)
 
