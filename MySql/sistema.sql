@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2022 a las 20:35:31
+-- Tiempo de generación: 21-11-2022 a las 03:04:00
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -39,11 +39,11 @@ CREATE TABLE `empleados` (
 --
 
 INSERT INTO `empleados` (`Id`, `nombre`, `correo`, `foto`) VALUES
-(7, 'Hugo Armando Arciniegas', 'hugo.arciniegas1974@gmail.com', 'Foto My.png'),
-(8, 'Marizuly Palacio Echeverry', 'marizuly19@gmail.com', 'Mari.png'),
-(9, 'Angie Erith Aroca Caballero', 'Arocaangie23@gmail.com', 'angie.png'),
-(10, 'Sandra Milena Bolívar Cárdenas', 'Sandybolivar90@gmail.com', 'sandra.png'),
-(11, 'Pierre Grandett Pineda', 'Grandett1@gmail.com', 'Pierre.png');
+(7, 'Hugo Armando Arciniegas', 'hugo.arciniegas1974@gmail.com', ''),
+(16, 'Angie Erith Aroca Caballero', 'Arocaangie23@gmail.com', 'angie.png'),
+(17, 'Sandra Milena Bolívar Cárdenas', 'Sandybolivar90@gmail.com', 'sandra.png'),
+(18, 'Marizuly Palacio Echeverry', 'marizuly19@gmail.com', 'Mari.png'),
+(19, 'Pierre Grandett Pineda', 'Grandett1@gmail.com', 'Pierre.png');
 
 --
 -- Índices para tablas volcadas
@@ -63,7 +63,7 @@ ALTER TABLE `empleados`
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `Id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
