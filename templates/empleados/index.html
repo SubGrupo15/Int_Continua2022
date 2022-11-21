@@ -1,4 +1,13 @@
+    
     {% include 'header.html' %}
+    <br/>
+    <a href="{{url_for('create')}}" class="btn btn-outline-succes">
+
+        Ingresar Nuevo Empleado
+    </a>
+    <br/>
+    <br/>
+
     <table class="table table-light">
         <thead class="thead-light">
             <tr>
@@ -21,9 +30,8 @@
 
                 <td>{{empleado[1] }}</td>
                 <td>{{empleado[2] }}</td>
-                <td> <a href="/edit/{{empleado[0]}}">Editar</a>                   
-                    <a href="/destroy/{{empleado[0]}}">Eliminar</a>
-                    Borrar 
+                <td> <a class="btn btn-outline-warning" href="/edit/{{empleado[0]}}">Editar</a>                   
+                     <a onclick="return confirm('Desea Eliminar al Empleado ?')" class="btn-outline-danger" href="/destroy/{{empleado[0]}}">Eliminar</a>
                 </td>
             </tr>   
             {% endfor %}

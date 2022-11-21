@@ -1,21 +1,47 @@
 {% include 'header.html' %}
-Formulario para Crear Empleados
+
+{% with messages= get_flashed_messages() %}
+
+{% if messages %}
+    <div class="alert alert-danger" role="alert">
+    {% for message in messages %}
+        {{ message }} 
+    {% endfor %}
+    </div>
+{% endif %}
+
+{% endwith %}
+
+<br>
 <form method="post" action="/store" enctype="multipart/form-data">
- 
-    Nombre:
-    <input type="text" name="txtnombre" id="txtnombre">
-    <br>
 
-    Correo:
-    <input type="text" name="txtcorreo" id="txtcorreo">
-    <br>
+    <div class="card">
+        <div class="card-header">
+            Ingresar Empleado
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Datos del Empleado</h5>
+            <p class="card-text">
 
-    Foto:
-    <input type="file" name="txtfoto" id="txtfoto">
-    <br>
-    <br>
-    <input type="submit" value="Agregar">
-    <br>
-    
+               <div class="form-group">
+                <label for="txtnombre">Nombre:</label>
+                <input id="txtnombre" class="form-control" type="text" name="txtnombre">
+               </div>  
+               <div class="form-group">
+                <label for="txtcorreo">Correo:</label>
+                <input id="txtcorreo" class="form-control" type="text" name="txtcorreo">
+               </div> 
+               <div class="form-group">
+                <label for="txtfoto">Foto:</label>
+                <input id="txtfoto" class="form-control" type="file" name="txtfoto">
+               </div>
+
+               <div class="form-group">
+                <input type="submit" class="btn btn-succes" value="Agregar">
+                <a href="{{url_for('index')}}" class="btn btn-primary">Regresar</a> 
+                </div>
+            </p>
+        </div>
+    </div>
 </form>
 {% include 'footer.html' %} 

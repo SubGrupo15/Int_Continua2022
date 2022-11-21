@@ -1,30 +1,48 @@
 {% include 'header.html' %}
 
-Formulario para editar Empleados
 {% for empleado in empleados  %}
 
 
 <form method="post" action="/update" enctype="multipart/form-data">
 
- 
-    <input type="text" value="{{empleado[0] }}" name="txtID" id="txtID">
-    <br/>
-    Nombre:
-    <input type="text" value="{{empleado[1] }}" name="txtnombre"  id="txtnombre">
-    <br>
-    
-    Correo:
-    <input type="text" value="{{empleado[2] }}" name="txtcorreo"  id="txtcorreo">
-    <br>
+    <div class="card">
+        <div class="card-header">
+            Editar Empleado
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Datos del Empleado</h5>
+            <p class="card-text">
+           
+                <div class="form-group">
+                    <label for="txtnombre">Nombre:</label>
+                    <input id="txtnombre" value="{{empleado[1] }}" class="form-control" type="text" name="txtnombre">
+                </div>
+                <div class="form-group">
+                    <label for="txtcorreo">Correo:</label>
+                    <input id="txtcorreo" value="{{empleado[2] }}" class="form-control" type="text" name="txtcorreo">
+                </div>
+                <div class="form-group">
+                    <label for="txtfoto">Foto:</label>
 
-    Foto:
-    {{empleado[3] }}
-    <input type="file" name="txtfoto" id="txtfoto">
-    <br>
-    <br>
-    <input type="submit" value="Modificar">
-    <br>
-    
+                    <img class="img-thumbnail" width="100" src="¨{{url_for('uploads', nombreFoto=empleado[3]) }}" alt="">
+
+                    <input id="txtfoto" class="form-control" type="file" name="txtfoto">
+                </div>
+                
+                <input type="text" value="{{empleado[0] }}" name="txtID" id="txtID">
+                
+                <div class="form-group">
+                    <input type="submit" class="btn btn-succes"  value="Modificar">
+                    <a href="{{url_for('index')}}" class="btn btn-primary">Regresar</a>    
+                </div>
+                
+                <br/>
+                <br>
+                <br>              
+
+            </p>
+        </div>
+    </div>
 </form>
     
 {% endfor %}
